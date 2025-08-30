@@ -30,44 +30,45 @@ def compare_scores(user_score, computer_score):
     else:
         return "You lose"
 
-user_cards = []
-computer_cards = []
-computer_score = -1
-user_score = -1
-# Blackjack Game
-print("Welcome to Blackjack!")
-print("The goal is to get as close to 21 without going over.")
-print("Aces can be 1 or 11, face cards are worth 10.")  
-# Initial dealing of cards
-for _ in range(2):
-    user_cards.append(deal_card())
-    computer_cards.append(deal_card())
+if __name__ == "__main__":
+    user_cards = []
+    computer_cards = []
+    computer_score = -1
+    user_score = -1
+    # Blackjack Game
+    print("Welcome to Blackjack!")
+    print("The goal is to get as close to 21 without going over.")
+    print("Aces can be 1 or 11, face cards are worth 10.")  
+    # Initial dealing of cards
+    for _ in range(2):
+        user_cards.append(deal_card())
+        computer_cards.append(deal_card())
 
-is_game_over = False
-should_continue = True  
-while not is_game_over:
-    user_score = calculate_score(user_cards)
-    computer_score = calculate_score(computer_cards)
-    
-    print(f"Your cards: {user_cards}, current score: {user_score}")
-    print(f"Computer's first card: {computer_cards[0]}")
-    
-    if user_score == 0 or computer_score == 0 or user_score > 21:
-        is_game_over = True
-    else:
-        should_continue = input("Type 'y' to get another card, type 'n' to pass: ")
-        if should_continue == 'y':
-            user_cards.append(deal_card())
-        else:
+    is_game_over = False
+    should_continue = True  
+    while not is_game_over:
+        user_score = calculate_score(user_cards)
+        computer_score = calculate_score(computer_cards)
+        
+        print(f"Your cards: {user_cards}, current score: {user_score}")
+        print(f"Computer's first card: {computer_cards[0]}")
+        
+        if user_score == 0 or computer_score == 0 or user_score > 21:
             is_game_over = True
+        else:
+            should_continue = input("Type 'y' to get another card, type 'n' to pass: ")
+            if should_continue == 'y':
+                user_cards.append(deal_card())
+            else:
+                is_game_over = True
 
-while computer_score != 0 and computer_score < 17:
-    computer_cards.append(deal_card())
-    computer_score = calculate_score(computer_cards)
+    while computer_score != 0 and computer_score < 17:
+        computer_cards.append(deal_card())
+        computer_score = calculate_score(computer_cards)
 
-print(f"Your final hand: {user_cards}, final score: {user_score}")
-print(f"Computer's final hand: {computer_cards}, final score: {computer_score}")
-print(compare_scores(user_score, computer_score))
-print("Thanks for playing!")
+    print(f"Your final hand: {user_cards}, final score: {user_score}")
+    print(f"Computer's final hand: {computer_cards}, final score: {computer_score}")
+    print(compare_scores(user_score, computer_score))
+    print("Thanks for playing!")
 
 # The game is now complete and ready to be played.
